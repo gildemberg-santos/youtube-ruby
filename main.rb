@@ -1,11 +1,15 @@
 require 'uri'
+require 'yaml'
 require 'net/http'
+
+@configurations = YAML.load_file('config.yml')
+puts @configurations.inspect
 
 url = 'https://www.googleapis.com/youtube/v3/playlistItems'
 
 params = {
   playlistId: nil,
-  key: '', # KEY API https://developers.google.com/youtube/v3/docs/playlists/
+  key: @configurations['default']['api_key'], # KEY API https://developers.google.com/youtube/v3/docs/playlists/
   alt: 'json',
   part: 'snippet,contentDetails',
   prettyPrint: false,
