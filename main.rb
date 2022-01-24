@@ -3,6 +3,8 @@ require 'yaml'
 require 'net/http'
 
 system("clear")
+puts "🎮 O programa foi iniciado..."
+sleep 3
 
 @configurations = YAML.load_file('config.yml')
 
@@ -31,14 +33,15 @@ ARGV.each do |arg|
   end
 end
 
+system("clear")
 puts "🤖 Carregando a lista ..."
 uri = URI(url)
 uri.query = URI.encode_www_form(params)
 res = Net::HTTP.get(uri)
 videos_ids = eval res
+sleep 3
 
 system("clear")
-
 if videos_ids.nil?
   puts "🚨 Não consegui indenticar nenhum video nessa lista. 😔"
   exit
@@ -53,10 +56,12 @@ else
   system("clear")
   puts "📂 A pasta (Output) já existe."
 end
+sleep 3
 
 total_de_videos = videos_ids.length
 video_atual = 0
 
+sleep 3
 videos_ids.each do |item|
   video_atual += 1
   id = item[:contentDetails][:videoId]
